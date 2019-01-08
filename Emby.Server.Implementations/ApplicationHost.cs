@@ -443,6 +443,27 @@ namespace Emby.Server.Implementations
         /// <value>The application version.</value>
         public Version ApplicationVersion => _version ?? (_version = typeof(ApplicationHost).Assembly.GetName().Version);
 
+        private string _serverVersion;
+        /// <summary>
+        /// Gets the current application server version
+        /// </summary>
+        /// <value>The application server version.</value>
+        public string ApplicationServerVersion => _serverVersion ?? (_serverVersion = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).FileVersion);
+
+        private BuildVersion _buildVersion;
+        /// <summary>
+        /// Gets the current application server version
+        /// </summary>
+        /// <value>The application server version.</value>
+        public BuildVersion ApplicationBuildVersion => _buildVersion ?? (_buildVersion = BuildVersion.FromSimpleFile("jellyfin.version"));
+
+        private string _productName;
+        /// <summary>
+        /// Gets the current application name
+        /// </summary>
+        /// <value>The application name.</value>
+        public string ApplicationProductName => _productName ?? (_productName = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location).ProductName);
+
         private DeviceId _deviceId;
         public string SystemId
         {
@@ -1837,6 +1858,9 @@ namespace Emby.Server.Implementations
                 HasPendingRestart = HasPendingRestart,
                 IsShuttingDown = IsShuttingDown,
                 Version = ApplicationVersion.ToString(),
+                ServerVersion = ApplicationServerVersion,
+                BuildVersion = ApplicationBuildVersion,
+                ProductName = ApplicationProductName,
                 WebSocketPortNumber = HttpPort,
                 CompletedInstallations = InstallationManager.CompletedInstallations.ToArray(),
                 Id = SystemId,
@@ -1883,6 +1907,8 @@ namespace Emby.Server.Implementations
             return new PublicSystemInfo
             {
                 Version = ApplicationVersion.ToString(),
+                ServerVersion = ApplicationServerVersion,
+                BuildVersion = ApplicationBuildVersion,
                 Id = SystemId,
                 OperatingSystem = EnvironmentInfo.OperatingSystem.ToString(),
                 WanAddress = wanAddress,

@@ -21,6 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\jellyfin.version" Link="jellyfin.version">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
@@ -40,5 +46,15 @@
     <ProjectReference Include="..\Emby.IsoMounting\IsoMounter\IsoMounter.csproj" />
     <ProjectReference Include="..\Emby.Server.Implementations\Emby.Server.Implementations.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="jellyfin.version">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="$(ProjectDir)..\update-version" WorkingDirectory="$(ProjectDir)..\" />
+  </Target>
 
 </Project>
