@@ -254,4 +254,4 @@ debian/jellyfin/
 
 # Don't ignore the debian/bin folder
 !debian/bin/
-jellyfin.version
+jellyfin_version.ini

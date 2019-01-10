@@ -27,15 +27,4 @@ Part of the Jellyfin project (https://jellyfin.media)
    along with this program. If not, see <https://www.gnu.org/licenses/>.
 :licenseblock
 
-SET commit=
-for /f "delims=" %%a in ('git rev-parse HEAD') do @set commit=%%a
-SET count=
-for /f "delims=" %%a in ('git rev-list HEAD --count') do @set count=%%a
-SET branch=
-for /f "delims=" %%a in ('git rev-parse --abbrev-ref HEAD') do @set branch=%%a
-SET desc=
-for /f "delims=" %%a in ('git describe --tags') do @set desc=%%a
-SET remote=
-for /f "delims=" %%a in ('git config --get remote.origin.url') do @set remote=%%a
-echo %commit%^|%count%^|%branch%^|%desc%^|%remote% > jellyfin.version
-echo Updated build version to %commit%^|%count%^|%branch%^|%desc%^|%remote%
+powershell.exe -executionpolicy Bypass -file update-version.ps1

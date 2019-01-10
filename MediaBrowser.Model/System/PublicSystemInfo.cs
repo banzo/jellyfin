@@ -1,3 +1,5 @@
+using Jellyfin.Versioning;
+
 namespace MediaBrowser.Model.System
 {
     public class PublicSystemInfo
@@ -36,7 +38,7 @@ namespace MediaBrowser.Model.System
         /// Gets or sets the build version.
         /// </summary>
         /// <value>The build version.</value>
-        public BuildVersion BuildVersion { get; set; }
+        public ExtendedVersion ExtendedVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the operating sytem.
