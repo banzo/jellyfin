@@ -116,7 +116,7 @@ namespace Jellyfin.Versioning
                             TagDescription = value;
                             break;
                         case "remote":
-                            var remoteRepo = value.Replace(".git", string.Empty);
+                            var remoteRepo = value.Replace(".git", string.Empty).Replace("git@github.com:","https://github.com/");
                             if (Uri.IsWellFormedUriString(remoteRepo, UriKind.Absolute))
                             {
                                 Remote = new Uri(remoteRepo);
