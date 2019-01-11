@@ -456,7 +456,9 @@ namespace Emby.Server.Implementations
         /// Gets the current application server version
         /// </summary>
         /// <value>The application server version.</value>
-        public ExtendedVersion ApplicationExtendedVersion => _extendedVersion ?? (_extendedVersion = typeof(ApplicationHost).Assembly.GetCustomAttributes(typeof(AssemblyExtendedVersion), false).Cast<AssemblyExtendedVersion>().FirstOrDefault().ExtendedVersion);
+        public ExtendedVersion ApplicationExtendedVersion => _extendedVersion ??
+            (_extendedVersion = typeof(ApplicationHost).Assembly.GetCustomAttributes(typeof(AssemblyExtendedVersion), false)
+            .Cast<AssemblyExtendedVersion>().FirstOrDefault().ExtendedVersion);
 
         private string _productName;
         /// <summary>
