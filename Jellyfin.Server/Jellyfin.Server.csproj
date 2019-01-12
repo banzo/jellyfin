@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <AssemblyName>jellyfin</AssemblyName>
@@ -40,12 +40,6 @@
     <ProjectReference Include="..\Emby.IsoMounting\IsoMounter\IsoMounter.csproj" />
     <ProjectReference Include="..\Emby.Server.Implementations\Emby.Server.Implementations.csproj" />
     <ProjectReference Include="..\Jellyfin.Versioning\Jellyfin.Versioning.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="jellyfin.version">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

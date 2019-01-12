@@ -32,14 +32,15 @@ using System.Reflection;
 namespace Jellyfin.Versioning
 {
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class AssemblyExtendedVersion : Attribute {
+    public class AssemblyExtendedVersion : Attribute
+    {
         public ExtendedVersion ExtendedVersion { get; }
 
         public AssemblyExtendedVersion(ExtendedVersion ExtendedVersion)
         {
             this.ExtendedVersion = ExtendedVersion;
         }
-        public AssemblyExtendedVersion(string ApiVersion, bool ReadResource=true)
+        public AssemblyExtendedVersion(string ApiVersion, bool ReadResource = true)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var names = assembly.GetManifestResourceNames();
@@ -48,19 +49,12 @@ namespace Jellyfin.Versioning
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
-                if (stream != null)
+                using (var reader = new StreamReader(stream))
                 {
-                    using (var reader = new StreamReader(stream))
-                    {
-                        while(!reader.EndOfStream)
-                            result.Add(reader.ReadLine());
-                    }
-                    ExtendedVersion = new ExtendedVersion(new Version(ApiVersion), result.ToArray());
+                    while (!reader.EndOfStream)
+                        result.Add(reader.ReadLine());
                 }
-                else
-                {
-                    ExtendedVersion = new ExtendedVersion(new Version(ApiVersion));
-                }
+                ExtendedVersion = new ExtendedVersion(new Version(ApiVersion), result.ToArray());                
             }
         }
     }
