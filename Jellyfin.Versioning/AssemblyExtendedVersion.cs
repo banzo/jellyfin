@@ -49,12 +49,7 @@ namespace Jellyfin.Versioning
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
-                using (var reader = new StreamReader(stream))
-                {
-                    while (!reader.EndOfStream)
-                        result.Add(reader.ReadLine());
-                }
-                ExtendedVersion = new ExtendedVersion(new Version(ApiVersion), result.ToArray());                
+                ExtendedVersion = new ExtendedVersion(new Version(ApiVersion), stream);
             }
         }
     }
