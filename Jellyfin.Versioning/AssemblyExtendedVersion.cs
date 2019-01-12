@@ -32,7 +32,7 @@ using System.Reflection;
 namespace Jellyfin.Versioning
 {
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class AssemblyExtendedVersion : Attribute
+    public sealed class AssemblyExtendedVersion : Attribute
     {
         public ExtendedVersion ExtendedVersion { get; }
 
@@ -43,9 +43,7 @@ namespace Jellyfin.Versioning
         public AssemblyExtendedVersion(string apiVersion, bool readResource = true)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var names = assembly.GetManifestResourceNames();
             var resourceName = "Jellyfin.Versioning.jellyfin_version.ini";
-            var result = new List<string>();
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
