@@ -60,15 +60,15 @@ namespace Jellyfin.Versioning
 
         }
 
-        public ExtendedVersion(Version ApiVersion) : this()
+        public ExtendedVersion(Version apiVersion) : this()
         {
-            this.ApiVersion = ApiVersion;
+            this.ApiVersion = apiVersion;
         }
 
-        public ExtendedVersion(Version ApiVersion, Stream ExtendedVersionFileStream) : this(ApiVersion)
+        public ExtendedVersion(Version apiVersion, Stream extendedVersionFileStream) : this(apiVersion)
         {
             int line = 1;
-            using (var reader = new StreamReader(ExtendedVersionFileStream))
+            using (var reader = new StreamReader(extendedVersionFileStream))
             {
                 while (!reader.EndOfStream)
                 {
@@ -82,7 +82,7 @@ namespace Jellyfin.Versioning
                     var kvpair = item.Split('=');
                     if (kvpair.Length != 2)
                     {
-                        throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                        throw new ArgumentException(nameof(extendedVersionFileStream),
                             $"ExtendedVersionFile contains bad key-value pair '{item}' at line {line}.");
                     }
                     var key = kvpair[0].Trim().ToLower();
@@ -92,7 +92,7 @@ namespace Jellyfin.Versioning
                         case "commit":
                             if (value.Length < 7 || value.Length > 40)
                             {
-                                throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                                throw new ArgumentException(nameof(extendedVersionFileStream),
                                     $"ExtendedVersionFile has a bad commit hash '{value}' on line {line}, it should be a string between 7 and 40 characters.");
                             }
                             CommitHash = value;
@@ -100,7 +100,7 @@ namespace Jellyfin.Versioning
                         case "branch":
                             if (string.IsNullOrWhiteSpace(value))
                             {
-                                throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                                throw new ArgumentException(nameof(extendedVersionFileStream),
                                     $"ExtendedVersionFile has a bad branch '{value}' on line {line}, it can not be empty.");
                             }
                             Branch = value;
@@ -108,7 +108,7 @@ namespace Jellyfin.Versioning
                         case "revision":
                             if (!long.TryParse(value, out long rev))
                             {
-                                throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                                throw new ArgumentException(nameof(extendedVersionFileStream),
                                     $"ExtendedVersionFile has a bad revision '{value}' on line {line}, it should be an integer.");
                             }
                             Revision = rev;
@@ -116,7 +116,7 @@ namespace Jellyfin.Versioning
                         case "tagdesc":
                             if (string.IsNullOrWhiteSpace(value))
                             {
-                                throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                                throw new ArgumentException(nameof(extendedVersionFileStream),
                                     $"ExtendedVersionFile has a bad tag description '{value}' on line {line}, it can not be empty.");
                             }
                             TagDescription = value;
@@ -134,12 +134,12 @@ namespace Jellyfin.Versioning
                             }
                             else
                             {
-                                throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                                throw new ArgumentException(nameof(extendedVersionFileStream),
                                     $"ExtendedVersionFile has a bad remote URI '{value}' on line {line}, it should be a valid remote URI (ssh or https).");
                             }
                             break;
                         default:
-                            throw new ArgumentException(nameof(ExtendedVersionFileStream),
+                            throw new ArgumentException(nameof(extendedVersionFileStream),
                             $"ExtendedVersionFile contains an unrecognized key-value pair '{item}' at line {line}.");
                     }
                    

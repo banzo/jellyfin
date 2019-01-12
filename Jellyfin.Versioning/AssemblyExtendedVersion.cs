@@ -40,7 +40,7 @@ namespace Jellyfin.Versioning
         {
             this.ExtendedVersion = ExtendedVersion;
         }
-        public AssemblyExtendedVersion(string ApiVersion, bool ReadResource = true)
+        public AssemblyExtendedVersion(string apiVersion, bool readResource = true)
         {
             var assembly = Assembly.GetExecutingAssembly();
             var names = assembly.GetManifestResourceNames();
@@ -49,7 +49,7 @@ namespace Jellyfin.Versioning
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
-                ExtendedVersion = new ExtendedVersion(new Version(ApiVersion), stream);
+                ExtendedVersion = new ExtendedVersion(new Version(apiVersion), stream);
             }
         }
     }
