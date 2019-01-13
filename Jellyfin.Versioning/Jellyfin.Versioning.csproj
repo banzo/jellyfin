@@ -13,10 +13,6 @@
     <EmbeddedResource Include="jellyfin_version.ini" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="$(ProjectDir)update-version" />
   </Target>
