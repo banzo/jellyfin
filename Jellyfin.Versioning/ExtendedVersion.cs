@@ -1,15 +1,8 @@
 // Jellyfin.Versioning/ExtendedVersion.cs
 // Part of the Jellyfin project (https://jellyfin.media)
 //
-//    This Source Code Form is subject to the terms of the Mozilla Public
-//    License, v. 2.0. If a copy of the MPL was not distributed with this file,
-//    You can obtain one at http://mozilla.org/MPL/2.0/.
-//
 //    All copyright belongs to the Jellyfin contributors; a full list can
 //    be found in the file CONTRIBUTORS.md
-//
-//    Alternatively, the contents of this file may be used under the terms
-//    of the GNU General Public License Version 2 or later, as described below:
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
