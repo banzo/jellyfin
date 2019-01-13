@@ -1,4 +1,4 @@
-// Jellyfin.Versioning/ExtendedVersion.cs
+// Jellyfin.Versioning/AssemblyExtendedVersion.cs
 // Part of the Jellyfin project (https://jellyfin.media)
 //
 //    All copyright belongs to the Jellyfin contributors; a full list can
