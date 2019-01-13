@@ -33,6 +33,7 @@ namespace Jellyfin.Versioning
         {
             this.ExtendedVersion = ExtendedVersion;
         }
+        
         public AssemblyExtendedVersion(string apiVersion, bool readResource = true)
         {
             var assembly = Assembly.GetExecutingAssembly();
