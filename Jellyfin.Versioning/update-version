@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # Jellyfin.Versioning/update-version
 # Part of the Jellyfin project (https://jellyfin.media)
 #
@@ -18,19 +18,27 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-if [ -d ../.git ]; then
+if [ -d "$(dirname "$0")/../.git" ]; then
     commit=`git rev-parse HEAD`
     count=`git rev-list HEAD --count`
     branch=`git rev-parse --abbrev-ref HEAD`
     desc=`git describe --tags --always --long`
     remote=`git config --get remote.origin.url`
-    echo commit=$commi\nrevision=$count\nbranch=$branch\ntagdesc=$desc\nremote=$remote > jellyfin_version.ini
-    echo Updated build version in jellyfin_version.ini
-    echo commit=$commit
-    echo revision=$count
-    echo branch=$branch
-    echo tagdesc=$desc
-    echo remote=$remote
+    tee jellyfin_version.ini <<EOF
+commit=$commit
+revision=$count
+branch=$branch
+tagdesc=$desc
+remote=$remote
+EOF
+    cat <<EOF
+Updated build version in jellyfin_version.ini
+commit=$commit
+revision=$count
+branch=$branch
+tagdesc=$desc
+remote=$remote
+EOF
 else
     echo Did not update build version because there was no .git directory.
 fi

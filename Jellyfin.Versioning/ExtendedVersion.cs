@@ -31,35 +31,20 @@ namespace Jellyfin.Versioning
         [IgnoreDataMember]
         public Version ApiVersion { get; }
 
-        public string CommitHash { get; }
+        public string CommitHash { get; } = String.Empty;
 
-        public long Revision { get; }
+        public long Revision { get; } = 0;
 
-        public string Branch { get; }
+        public string Branch { get; } = String.Empty;
 
-        public string TagDescription { get; }
+        public string TagDescription { get; } = String.Empty;
 
-        public Uri Remote { get; }
+        [IgnoreDataMember]
+        public Uri Remote { get; } = null;
 
-        public ExtendedVersion()
+        public ExtendedVersion(Version apiVersion, Stream extendedVersionFileStream)
         {
-            ApiVersion = new Version(1, 0, 0, 0);
-            //Defaults
-            CommitHash = string.Empty;
-            Revision = 1;
-            Branch = "master";
-            TagDescription = "master";
-            Remote = new Uri("https://jellyfin.media");
-
-        }
-
-        public ExtendedVersion(Version apiVersion) : this()
-        {
-            this.ApiVersion = apiVersion;
-        }
-
-        public ExtendedVersion(Version apiVersion, Stream extendedVersionFileStream) : this(apiVersion)
-        {
+            ApiVersion = apiVersion;
             int line = 1;
             using (var reader = new StreamReader(extendedVersionFileStream))
             {
@@ -135,9 +120,7 @@ namespace Jellyfin.Versioning
                             throw new ArgumentException(nameof(extendedVersionFileStream),
                             $"ExtendedVersionFile contains an unrecognized key-value pair '{item}' at line {line}.");
                     }
-                   
                     line++;
-
                 }
             }
         }
